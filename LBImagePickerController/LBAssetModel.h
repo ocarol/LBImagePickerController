@@ -24,7 +24,7 @@
 
 @interface LBAssetPickerModel : NSObject
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, assign) NSInteger index; /// 无序的时候为0，有序的时候为1、2、3...
+@property (nonatomic, assign) NSInteger index; /// 0,1,2,3...
 @property (nonatomic, strong) LBAssetModel *assetModel;      ///< The select status of a photo, default is No
 /// 用一个PHAsset/ALAsset实例，初始化一个照片模型
 + (instancetype)modelWithTitle:(NSString *)title atIndex:(NSInteger)index;

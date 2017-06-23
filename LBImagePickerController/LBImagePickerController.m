@@ -71,8 +71,16 @@
     return [self initWithMaxImagesCount:maxImagesCount photoTitles:nil delegate:delegate pushPhotoPickerVc:YES cameraInside:cameraInside];
 }
 
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount cameraInside:(BOOL)cameraInside {
+    return [self initWithMaxImagesCount:maxImagesCount delegate:nil cameraInside:cameraInside];
+}
+
 - (instancetype)initWithPhotoTitles:(NSArray <NSString *>*)photoTitles delegate:(id<LBImagePickerControllerDelegate>)delegate cameraInside:(BOOL)cameraInside {
     return [self initWithMaxImagesCount:photoTitles.count photoTitles:photoTitles delegate:delegate pushPhotoPickerVc:YES cameraInside:cameraInside];
+}
+
+- (instancetype)initWithPhotoTitles:(NSArray <NSString *>*)photoTitles cameraInside:(BOOL)cameraInside {
+    return [self initWithPhotoTitles:photoTitles delegate:nil cameraInside:cameraInside];
 }
 
 /// maxImagesCount 优先以photoTitles为参考对象
@@ -385,9 +393,11 @@
         selectedArray = self.selectedModels.copy;
     }
     
+    NSMutableArray *imagesArray = [NSMutableArray array];
     __block int finishCount = 0;
     for (LBAssetModel *model in selectedArray) {
         if (model.PreviewImage) {
+            [imagesArray addObject:model.PreviewImage];
             finishCount++;
             continue;
         }
@@ -397,11 +407,12 @@
             __strong __typeof(weakSelf) strongSelf = weakSelf;
             if (!isDegraded) {
                 model.PreviewImage = photo;
+                [imagesArray addObject:model.PreviewImage];
                 finishCount ++;
                 
                 if (finishCount == selectedArray.count) {
                     [strongSelf.hud hidden];
-                    [strongSelf callDelegateMethodFinish:selectedArray];
+                    [strongSelf callDelegateMethodFinish:selectedArray images:imagesArray.copy];
                     if (strongSelf.autoDismiss) {
                         [strongSelf dismissViewControllerAnimated:YES completion:^{
                         }];
@@ -413,7 +424,7 @@
     
     if (finishCount == selectedArray.count) {
         [self.hud hidden];
-        [self callDelegateMethodFinish:selectedArray];
+        [self callDelegateMethodFinish:selectedArray images:imagesArray.copy];
         if (self.autoDismiss) {
             [self dismissViewControllerAnimated:YES completion:^{
             }];
@@ -564,13 +575,13 @@
     }
 }
 
-- (void)callDelegateMethodFinish:(NSArray *)selectedArray {
-    if ([self.aDelegate respondsToSelector:@selector(LBImagePickerController:didFinishPickingPhotos:)]) {
-        [self.aDelegate LBImagePickerController:self didFinishPickingPhotos:selectedArray];
+- (void)callDelegateMethodFinish:(NSArray *)selectedArray images:images{
+    if ([self.aDelegate respondsToSelector:@selector(LBImagePickerController:didFinishPickingPhotos:images:)]) {
+        [self.aDelegate LBImagePickerController:self didFinishPickingPhotos:selectedArray images:images];
     }
     
     if (self.LBImagePickerDidFinishPickingPhotosBlock) {
-        self.LBImagePickerDidFinishPickingPhotosBlock(selectedArray);
+        self.LBImagePickerDidFinishPickingPhotosBlock(selectedArray,images);
     }
 }
 

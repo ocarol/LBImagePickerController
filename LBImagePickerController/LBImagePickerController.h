@@ -18,7 +18,7 @@
 @class LBImagePickerController,LBAssetModel,LBAlbumModel;
 @protocol LBImagePickerControllerDelegate <NSObject>
 @optional
-- (void)LBImagePickerController:(LBImagePickerController *)picker didFinishPickingPhotos:(NSArray <LBAssetModel *> *)assetModels;
+- (void)LBImagePickerController:(LBImagePickerController *)picker didFinishPickingPhotos:(NSArray <LBAssetModel *> *)assetModels images:(NSArray <UIImage *>*)images;
 - (void)LBImagePickerControllerDidCancel:(LBImagePickerController *)picker;
 @end
 
@@ -28,7 +28,7 @@
 /** LBImagePickerControllerDelegate */
 @property (nonatomic, weak) id<LBImagePickerControllerDelegate> aDelegate;
 /** 结果回调 */
-@property (nonatomic, copy) void (^LBImagePickerDidFinishPickingPhotosBlock)(NSArray <LBAssetModel *> *assetModels);
+@property (nonatomic, copy) void (^LBImagePickerDidFinishPickingPhotosBlock)(NSArray <LBAssetModel *> *assetModels,NSArray <UIImage *>*images);
 @property (nonatomic, copy) void (^LBImagePickerControllerDidCancelBlock)();
 
 /** 默认为YES，如果设置为NO, 选择器将不会自己dismiss */
@@ -63,6 +63,7 @@
  @return 无序的图片选择器
  */
 - (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount delegate:(id<LBImagePickerControllerDelegate>)delegate cameraInside:(BOOL)cameraInside;
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount cameraInside:(BOOL)cameraInside;
 
 /**
  用这个初始化方法 指定需要选中的图片，图片选择有序
@@ -73,6 +74,7 @@
  @return 有序的图片选择器
  */
 - (instancetype)initWithPhotoTitles:(NSArray <NSString *>*)photoTitles delegate:(id<LBImagePickerControllerDelegate>)delegate cameraInside:(BOOL)cameraInside;
+- (instancetype)initWithPhotoTitles:(NSArray <NSString *>*)photoTitles cameraInside:(BOOL)cameraInside;
 
 // 拍照
 - (void)takePhoto;

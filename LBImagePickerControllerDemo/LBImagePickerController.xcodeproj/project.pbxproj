@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		124852BB1EF1253F0081A075 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 124852BA1EF1253F0081A075 /* CollectionViewCell.m */; };
 		12B57BDE1EF0017F0075C52D /* LBAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B57BBE1EF0017F0075C52D /* LBAlbumCell.m */; };
 		12B57BDF1EF0017F0075C52D /* LBAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B57BC01EF0017F0075C52D /* LBAlbumModel.m */; };
 		12B57BE01EF0017F0075C52D /* LBAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B57BC21EF0017F0075C52D /* LBAlbumPickerController.m */; };
@@ -52,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		124852B91EF1253F0081A075 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		124852BA1EF1253F0081A075 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		12B57BBD1EF0017F0075C52D /* LBAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBAlbumCell.h; sourceTree = "<group>"; };
 		12B57BBE1EF0017F0075C52D /* LBAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBAlbumCell.m; sourceTree = "<group>"; };
 		12B57BBF1EF0017F0075C52D /* LBAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBAlbumModel.h; sourceTree = "<group>"; };
@@ -131,6 +134,12 @@
 		12B57BBC1EF0017F0075C52D /* LBImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
+				12B57BC81EF0017F0075C52D /* LBImagePickerController.h */,
+				12B57BC91EF0017F0075C52D /* LBImagePickerController.m */,
+				12B57BCE1EF0017F0075C52D /* LBPhotoPickerController.h */,
+				12B57BCF1EF0017F0075C52D /* LBPhotoPickerController.m */,
+				12B57BD61EF0017F0075C52D /* LBPhotoPreviewController.h */,
+				12B57BD71EF0017F0075C52D /* LBPhotoPreviewController.m */,
 				12B57BBD1EF0017F0075C52D /* LBAlbumCell.h */,
 				12B57BBE1EF0017F0075C52D /* LBAlbumCell.m */,
 				12B57BBF1EF0017F0075C52D /* LBAlbumModel.h */,
@@ -141,29 +150,23 @@
 				12B57BC41EF0017F0075C52D /* LBAssetModel.m */,
 				12B57BC51EF0017F0075C52D /* LBImageManager.h */,
 				12B57BC61EF0017F0075C52D /* LBImageManager.m */,
-				12B57BC71EF0017F0075C52D /* LBImagePickerController.bundle */,
-				12B57BC81EF0017F0075C52D /* LBImagePickerController.h */,
-				12B57BC91EF0017F0075C52D /* LBImagePickerController.m */,
 				12B57BCA1EF0017F0075C52D /* LBImagPickerHUD.h */,
 				12B57BCB1EF0017F0075C52D /* LBImagPickerHUD.m */,
 				12B57BCC1EF0017F0075C52D /* LBPhotoPickerCell.h */,
 				12B57BCD1EF0017F0075C52D /* LBPhotoPickerCell.m */,
-				12B57BCE1EF0017F0075C52D /* LBPhotoPickerController.h */,
-				12B57BCF1EF0017F0075C52D /* LBPhotoPickerController.m */,
 				12B57BD01EF0017F0075C52D /* LBPhotoPickerPreviewCell.h */,
 				12B57BD11EF0017F0075C52D /* LBPhotoPickerPreviewCell.m */,
 				12B57BD21EF0017F0075C52D /* LBPhotoPickerPreviewController.h */,
 				12B57BD31EF0017F0075C52D /* LBPhotoPickerPreviewController.m */,
 				12B57BD41EF0017F0075C52D /* LBPhotoPreviewCell.h */,
 				12B57BD51EF0017F0075C52D /* LBPhotoPreviewCell.m */,
-				12B57BD61EF0017F0075C52D /* LBPhotoPreviewController.h */,
-				12B57BD71EF0017F0075C52D /* LBPhotoPreviewController.m */,
 				12B57BD81EF0017F0075C52D /* LBPhotoPreviewModel.h */,
 				12B57BD91EF0017F0075C52D /* LBPhotoPreviewModel.m */,
 				12B57BDA1EF0017F0075C52D /* LBPhotoSheetAlertView.h */,
 				12B57BDB1EF0017F0075C52D /* LBPhotoSheetAlertView.m */,
 				12B57BDC1EF0017F0075C52D /* UIView+LBLayout.h */,
 				12B57BDD1EF0017F0075C52D /* UIView+LBLayout.m */,
+				12B57BC71EF0017F0075C52D /* LBImagePickerController.bundle */,
 			);
 			name = LBImagePickerController;
 			path = ../../LBImagePickerController;
@@ -197,6 +200,8 @@
 				12D597D01EE158890044D7DE /* AppDelegate.m */,
 				12D597D21EE158890044D7DE /* ViewController.h */,
 				12D597D31EE158890044D7DE /* ViewController.m */,
+				124852B91EF1253F0081A075 /* CollectionViewCell.h */,
+				124852BA1EF1253F0081A075 /* CollectionViewCell.m */,
 				12D597D51EE158890044D7DE /* Main.storyboard */,
 				12D597D81EE158890044D7DE /* Assets.xcassets */,
 				12D597DA1EE158890044D7DE /* LaunchScreen.storyboard */,
@@ -373,6 +378,7 @@
 				12B57BEB1EF0017F0075C52D /* LBPhotoPreviewController.m in Sources */,
 				12B57BE71EF0017F0075C52D /* LBPhotoPickerController.m in Sources */,
 				12B57BE01EF0017F0075C52D /* LBAlbumPickerController.m in Sources */,
+				124852BB1EF1253F0081A075 /* CollectionViewCell.m in Sources */,
 				12B57BEC1EF0017F0075C52D /* LBPhotoPreviewModel.m in Sources */,
 				12B57BE81EF0017F0075C52D /* LBPhotoPickerPreviewCell.m in Sources */,
 				12B57BEA1EF0017F0075C52D /* LBPhotoPreviewCell.m in Sources */,

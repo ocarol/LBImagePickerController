@@ -59,18 +59,18 @@ UIScrollViewDelegate
     [self setUpNav];
     [self.view addSubview:self.photoDetailCollectionView];
     
-    self.photoDetailCollectionView.contentOffset = CGPointMake(self.autoPositionIndex * [[UIScreen mainScreen] bounds].size.width, 0);
+    [self changeSelectedStatusAtIndex:self.autoPositionIndex];
+//    self.photoDetailCollectionView.contentOffset = CGPointMake(self.autoPositionIndex * [[UIScreen mainScreen] bounds].size.width, 0);
     [self.photoDetailCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.autoPositionIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-    
 }
 
-#pragma mark -btClick
+#pragma mark - btClick
 - (void)selectPhotoClick:(UIButton *)button {
     LBAssetModel *model = self.albumModel.models[self.currentIndex];
     [[LBImageManager manager].pickerVc changeAssetModelStatus:model];
     self.rightBtn.selected = model.isSelected;
-    
 }
+
 #pragma mark -UICollectionViewDataSource and UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
@@ -95,10 +95,13 @@ UIScrollViewDelegate
     NSInteger index = (offSetWidth + LBPHONEWIDTH * 0.5) / LBPHONEWIDTH;
     if (self.currentIndex != index) {
         self.currentIndex = index;
-        LBAssetModel *model = self.albumModel.models[index];
-        self.rightBtn.selected = model.isSelected;
+        [self changeSelectedStatusAtIndex:index];
     }
-    
+}
+
+- (void)changeSelectedStatusAtIndex:(NSInteger)index {
+    LBAssetModel *model = self.albumModel.models[index];
+    self.rightBtn.selected = model.isSelected;
 }
 
 

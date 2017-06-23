@@ -9,17 +9,23 @@
 #import "ViewController.h"
 #import "LBImagePickerController.h"
 #import "LBPhotoPreviewController.h"
+#import "CollectionViewCell.h"
 
-@interface ViewController ()<LBImagePickerControllerDelegate>
-@property (nonatomic, strong) NSArray *assetModels;
+@interface ViewController ()<LBImagePickerControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collection;
 
 @property (weak, nonatomic) IBOutlet UITextField *maxText;
 
 @property (weak, nonatomic) IBOutlet UITextField *maxTitle;
+@property (weak, nonatomic) IBOutlet UISwitch *cameraInside;
 
 @property (weak, nonatomic) IBOutlet UISwitch *sortAscending;
 
 @property (weak, nonatomic) IBOutlet UISwitch *showCamera;
+
+@property (nonatomic, strong) NSArray *assetModels;
+@property (nonatomic, strong) NSArray * images;
+@property (nonatomic, strong) NSArray * titles;
 
 @end
 
@@ -30,62 +36,75 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (IBAction)preview:(UIButton *)sender {
-    NSMutableArray *arrayM = [NSMutableArray array];
-    for (int i = 0; i < self.assetModels.count; i++) {
-        LBAssetModel *model = self.assetModels[i];
-        UIImage *image = model.PreviewImage;
-        [arrayM addObject:image];
-    }
-    
-    LBPhotoPreviewController *vc = [[LBPhotoPreviewController alloc] initWithImages:arrayM.copy];
-    vc.didDeletedBlock = ^(NSInteger index,UIImage *image) {
-      NSLog(@"已删除第%ld张照片.原位置为第%ld张",index,[arrayM indexOfObject:image]);
-    };
-    [self presentViewController:vc animated:YES completion:nil];
-    
-}
-
-- (IBAction)image_picker_outside:(id)sender {
-    [self pushPickerWithcameraInside:NO];
-}
-
 - (IBAction)image_picker:(UIButton *)sender {
-    [self pushPickerWithcameraInside:YES];
+    [self pushPickerWithcameraInside:self.cameraInside.on];
 }
 
 - (void)pushPickerWithcameraInside:(BOOL)cameraInside {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (int  i = 0; i < [self.maxTitle.text integerValue]; i++) {
-        NSString *title = [NSString stringWithFormat:@"请选择第%d张图片",i];
+        NSString *title = [NSString stringWithFormat:@"第%d张图片",i];
         [arrayM addObject:title];
     }
+    self.titles = arrayM.copy;
     
     LBImagePickerController *picker;
     if (arrayM.count) {
-        picker = [[LBImagePickerController alloc] initWithPhotoTitles:arrayM.copy delegate:self cameraInside:cameraInside];
+        picker = [[LBImagePickerController alloc] initWithPhotoTitles:self.titles cameraInside:cameraInside];
     }else {
-        picker = [[LBImagePickerController alloc] initWithMaxImagesCount:[self.maxText.text integerValue] delegate:self cameraInside:cameraInside];
+        picker = [[LBImagePickerController alloc] initWithMaxImagesCount:[self.maxText.text integerValue] cameraInside:cameraInside];
     }
     
     picker.showCamera = self.showCamera.on;
     picker.sortAscendingByModificationDate = self.sortAscending.on;
+    __weak __typeof(self) weakSelf = self;
+    picker.LBImagePickerDidFinishPickingPhotosBlock = ^(NSArray<LBAssetModel *> *assetModels, NSArray<UIImage *> *images) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.assetModels = assetModels;
+        strongSelf.images = images;
+        [strongSelf.collection reloadData];
+    };
     
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)LBImagePickerController:(LBImagePickerController *)picker didFinishPickingPhotos:(NSArray <LBAssetModel *> *)assetModels {
-    self.assetModels = assetModels;
-    for (LBAssetModel *model in assetModels) {
-        NSLog(@"已选中第%ld张照片",model.selctedIndex);
-    }
+
+#pragma mark - UICollectionView delegete method
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.images.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    LBAssetModel * model = self.assetModels[indexPath.row];
+    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ocarol" forIndexPath:indexPath];
+    cell.image = self.images[indexPath.row];
+    cell.title = (self.titles.count && self.titles.count - 1 < model.selctedIndex) ? self.titles[model.selctedIndex] : @"";
+    
+    return cell;
 }
 
 
-- (void)LBImagePickerControllerDidCancel:(LBImagePickerController *)picker {
-    NSLog(@"取消选择照片");
-
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray *imagesM = [NSMutableArray arrayWithArray:self.images];
+    NSMutableArray *modelsM = [NSMutableArray arrayWithArray:self.assetModels];
+    LBPhotoPreviewController *vc = [[LBPhotoPreviewController alloc] initWithImages:imagesM.copy];
+    vc.autoPositionIndex = indexPath.row;
+    __weak __typeof(self) weakSelf = self;
+    vc.didDeletedBlock = ^(NSInteger index,UIImage *image) {
+        [imagesM removeObject:image];
+        [modelsM removeObjectAtIndex:index];
+        weakSelf.images = imagesM.copy;
+        weakSelf.assetModels = modelsM.copy;
+        [weakSelf.collection reloadData];
+        
+    };
+    [self presentViewController:vc animated:YES completion:nil];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
