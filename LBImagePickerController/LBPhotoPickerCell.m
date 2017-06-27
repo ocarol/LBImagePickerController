@@ -91,7 +91,7 @@
         
         NSString *imageNamed = self.model.isSelected ? selectedImageName : unSelectedImageName;
         self.selectIcon.image = [LBImageManager imageNamed:imageNamed];
-        self.selectNumLabel.text = [NSString stringWithFormat:@"%ld",self.model.selctedIndex + 1];
+        self.selectNumLabel.text = [NSString stringWithFormat:@"%ld",(long)self.model.selctedIndex + 1];
         self.selectNumLabel.hidden = !(self.model.isSelected);
     }
     

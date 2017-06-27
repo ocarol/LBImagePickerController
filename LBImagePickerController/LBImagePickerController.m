@@ -349,7 +349,7 @@
 
 // 改变底部提示状态
 - (void)refreshBottomStatus {
-    [self.nextTipBtn setTitle:[NSString stringWithFormat:@"下一步(%ld/%ld)",self.selectedModels.count,self.maxImagesCount] forState:UIControlStateNormal];
+    [self.nextTipBtn setTitle:[NSString stringWithFormat:@"下一步(%ld/%ld)",(long)self.selectedModels.count,(long)self.maxImagesCount] forState:UIControlStateNormal];
     
     self.nextTipBtn.enabled = self.selectedModels.count;
     

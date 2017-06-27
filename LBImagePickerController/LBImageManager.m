@@ -496,8 +496,8 @@ static CGFloat TZScreenScale;
     } else if ([asset isKindOfClass:[ALAsset class]]) {
         ALAsset *alAsset = (ALAsset *)asset;
         ALAssetRepresentation *assetRep = [alAsset defaultRepresentation];
-        Byte *imageBuffer = (Byte *)malloc(assetRep.size);
-        NSUInteger bufferSize = [assetRep getBytes:imageBuffer fromOffset:0.0 length:assetRep.size error:nil];
+        Byte *imageBuffer = (Byte *)malloc((size_t)assetRep.size);
+        NSUInteger bufferSize = [assetRep getBytes:imageBuffer fromOffset:0.0 length:(NSUInteger)assetRep.size error:nil];
         NSData *imageData = [NSData dataWithBytesNoCopy:imageBuffer length:bufferSize freeWhenDone:YES];
         if (completion) completion(imageData,nil,NO);
     }

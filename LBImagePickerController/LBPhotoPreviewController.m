@@ -110,7 +110,7 @@ UIScrollViewDelegate
 
 
 - (void)refreshInfos {
-    self.titleLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.currentIndex + 1, self.imageModels.count];
+    self.titleLabel.text = [NSString stringWithFormat:@"%ld/%ld",(long)self.currentIndex + 1, (long)self.imageModels.count];
 }
 
 
