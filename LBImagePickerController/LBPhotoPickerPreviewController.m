@@ -2,7 +2,7 @@
 //  LBPhotoPickerPreviewController.m
 //  LBImagePickerController
 //
-//  Created by 余丽丽 on 2017/6/2.
+//  Created by ocarol on 2017/6/2.
 //  Copyright © 2017年 ocarol. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  CollectionViewCell.h
 //  LBImagePickerController
 //
-//  Created by 余丽丽 on 2017/6/14.
+//  Created by ocarol on 2017/6/14.
 //  Copyright © 2017年 ocarol. All rights reserved.
 //
 
