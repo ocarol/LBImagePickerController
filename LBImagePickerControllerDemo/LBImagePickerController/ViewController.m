@@ -43,7 +43,7 @@
 - (void)pushPickerWithcameraInside:(BOOL)cameraInside {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (int  i = 0; i < [self.maxTitle.text integerValue]; i++) {
-        NSString *title = [NSString stringWithFormat:@"第%d张图片",i];
+        NSString *title = [NSString stringWithFormat:@"第%d张图片",i + 1];
         [arrayM addObject:title];
     }
     self.titles = arrayM.copy;
