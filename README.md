@@ -94,3 +94,5 @@ iOS10 访问相册和相机需要额外配置info.plist文件：
 分别是Privacy - Photo Library Usage Description和Privacy - Camera Usage Description字段
 
 
+## Licenses
+All source code is licensed under the [MIT License](https://raw.github.com/rs/SDWebImage/master/LICENSE).
