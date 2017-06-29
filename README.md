@@ -29,9 +29,18 @@
 ## 效果预览图
 
 <img src="images/LBImagePickerControllerDemo.gif" width="40%" height="40%" alt="动态图"/>
-<img src="images/Snip20170629_1.png" width="40%" height="40%" alt="无序多选"/><img src="images/Snip20170629_2.png" width="40%" height="40%" alt="有序多选"/>
-<img src="images/Snip20170629_3.png" width="40%" height="40%" alt="无序多选预览"/><img src="images/Snip20170629_4.png" width="40%" height="40%" alt="有序多选预览"/>
-<img src="images/Snip20170629_5.png" width="40%" height="40%" alt="相机在外部"/><img src="images/Snip20170629_6.png" width="40%" height="40%" alt="对外预览删除"/>
+<div>
+<img src="images/Snip20170629_1.png" width="40%" height="40%" alt="无序多选"/>
+<img src="images/Snip20170629_2.png" width="40%" height="40%" alt="有序多选"/>
+</div>
+<div>
+<img src="images/Snip20170629_3.png" width="40%" height="40%" alt="无序多选预览"/>
+<img src="images/Snip20170629_4.png" width="40%" height="40%" alt="有序多选预览"/>
+</div>
+<div>
+<img src="images/Snip20170629_5.png" width="40%" height="40%" alt="相机在外部"/>
+<img src="images/Snip20170629_6.png" width="40%" height="40%" alt="对外预览删除"/>
+</div>
 
 
 ## 集成方式
